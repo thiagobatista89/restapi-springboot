@@ -1,29 +1,22 @@
-package com.thiago.restapi.model;
+package com.thiago.restapi.data.vo.v1;
 
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
-@Entity
-@Table(name = "persons")
-public class Person implements Serializable {
+
+
+public class PersonVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name", nullable = false, length = 80)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 80)
     private String lastName;
 
-    @Column(nullable = false, length = 100)
     private String address;
 
-    @Column(nullable = false, length = 6)
     private String gender;
 
 
@@ -67,7 +60,7 @@ public class Person implements Serializable {
         this.gender = gender;
     }
 
-    public Person () {}
+    public PersonVo() {}
 
 
     @Override
@@ -90,7 +83,7 @@ public class Person implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Person other = (Person) obj;
+        PersonVo other = (PersonVo) obj;
         if (address == null) {
             if (other.address != null)
                 return false;

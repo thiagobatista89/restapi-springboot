@@ -1,7 +1,16 @@
 package com.thiago.restapi.services;
 
+import com.thiago.restapi.Mapper.DozerMapper;
+import com.thiago.restapi.Mapper.custom.PersonMapper;
+import com.thiago.restapi.data.vo.v1.PersonVo;
+import com.thiago.restapi.data.vo.v2.PersonVoV2;
+import com.thiago.restapi.exceptions.ResourceNotFoundException;
 import com.thiago.restapi.model.Person;
+import com.thiago.restapi.repositories.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,51 +18,67 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
 @Service
 public class PersonService {
-    private final AtomicLong counter = new AtomicLong();
     private Logger logger = Logger.getLogger(PersonService.class.getName());
+    @Autowired
+    PersonRepository repository;
+    @Autowired
+    PersonMapper mapper;
 
-    public Person findById(String id) {
+    public PersonVo findById(Long id) {
+
         logger.info("Finding one person!");
-        Person person = new Person();
-        person.setId(counter.incrementAndGet());
-        person.setFirstName("Thiago");
-        person.setLastName("Batista");
-        person.setAdress("Lisbon, Portugal");
-        person.setGender("Male");
-        return person;
+
+        var entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+        return DozerMapper.parseObject(entity, PersonVo.class);
     }
 
-    public List<Person> findByAll(){
+    public List<PersonVo> findAll() {
+
         logger.info("Finding all people!");
-        List<Person> persons = new ArrayList<>();
-        for(int i = 0; i < 8; i++) {
-            Person person = mockPerson(i);
-            persons.add(person);
-        }
-        return persons;
+
+        return DozerMapper.parseListObjects(repository.findAll(), PersonVo.class);
     }
 
-    private Person mockPerson(int i) {
-        Person person = new Person();
-        person.setId(counter.incrementAndGet());
-        person.setFirstName("Person name " + i);
-        person.setLastName("Last name " + 1);
-        person.setAdress("Some adress in lisbon " + i);
-        person.setGender("Option " + i);
-        return person;
+    public PersonVo create(PersonVo person) {
+
+        logger.info("Creating one person!");
+        var entity = DozerMapper.parseObject(person, Person.class);
+        var vo = DozerMapper.parseObject(repository.save(entity), PersonVo.class);
+        return vo;
+
+    }
+    public PersonVoV2 createV2(PersonVoV2 person) {
+
+        logger.info("Creating one person with V2!");
+        var entity = mapper.convertVoToEntity(person);
+        var vo = mapper.convertEntityToVo(repository.save(entity));
+        return vo;
+
     }
 
-    public Person create(Person person) {
-        logger.info("Create one person!");
-        return person;
-    }
+    public PersonVo update(PersonVo person) {
 
-    public Person update(Person person) {
-        logger.info("Update a person!");
-        return person;
+        logger.info("Updating one person!");
+
+        var entity = repository.findById(person.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+
+        entity.setFirstName(person.getFirstName());
+        entity.setLastName(person.getLastName());
+        entity.setAddress(person.getAddress());
+        entity.setGender(person.getGender());
+
+        var vo = DozerMapper.parseObject(repository.save(entity), PersonVo.class);
+        return vo;
     }
-    public void delete(String person) {
-        logger.info("Delete a person!");
+    public void delete(Long id) {
+
+        logger.info("Deleting one person!");
+
+        var entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+        repository.delete(entity);
     }
 
 }
