@@ -1,0 +1,7 @@
+/Users/thiagobatista/Documents/restapi-springboot/src/main/java/com/thiago/restapi/model/Person.java
+/Users/thiagobatista/Documents/restapi-springboot/src/main/java/com/thiago/restapi/handler/CustomizedResponseEntityExceptionHandler.java
+/Users/thiagobatista/Documents/restapi-springboot/src/main/java/com/thiago/restapi/exceptions/ExceptionsResponse.java
+/Users/thiagobatista/Documents/restapi-springboot/src/main/java/com/thiago/restapi/controllers/PersonController.java
+/Users/thiagobatista/Documents/restapi-springboot/src/main/java/com/thiago/restapi/services/PersonService.java
+/Users/thiagobatista/Documents/restapi-springboot/src/main/java/com/thiago/restapi/exceptions/UnsupportedMathOperation.java
+/Users/thiagobatista/Documents/restapi-springboot/src/main/java/com/thiago/restapi/startup.java
