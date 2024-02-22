@@ -1,0 +1,13 @@
+com/thiago/restapi/repositories/PersonRepository.class
+com/thiago/restapi/Mapper/DozerMapper.class
+com/thiago/restapi/exceptions/ExceptionsResponse.class
+com/thiago/restapi/exceptions/UnsupportedMathOperation.class
+com/thiago/restapi/services/PersonService.class
+com/thiago/restapi/model/Person.class
+com/thiago/restapi/data/vo/v2/PersonVoV2.class
+com/thiago/restapi/StartApplication.class
+com/thiago/restapi/data/vo/v1/PersonVo.class
+com/thiago/restapi/controllers/PersonController.class
+com/thiago/restapi/exceptions/ResourceNotFoundException.class
+com/thiago/restapi/Mapper/custom/PersonMapper.class
+com/thiago/restapi/handler/CustomizedResponseEntityExceptionHandler.class

@@ -1,0 +1,3 @@
+com/thiago/restapi/startTests.class
+com/thiago/restapi/unitTests/mapper/mocks/MockPerson.class
+com/thiago/restapi/unitTests/DozerConverterTest.class

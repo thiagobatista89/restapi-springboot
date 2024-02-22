@@ -1,16 +1,19 @@
 package com.thiago.restapi.data.vo.v1;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 
-
+@JsonPropertyOrder({"id", "address", "firstName", "lastName", "address", "gender"})
 public class PersonVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    @JsonIgnore
     private Long id;
-
+    @JsonProperty("first_name")
     private String firstName;
 
     private String lastName;
