@@ -1,1 +1,4 @@
 docker run -dt -e MYSQL_ROOT_PASSWORD=root -e MYSQL_USER=user -e MYSQL_PASSWORD=paswword -e MYSQL_DATABASE=todo0 -p 3306:3306 mysql
+
+
+Migration to V3
